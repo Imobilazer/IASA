@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+
+
+
+
+<div class="bbody">
+
+    <!-- форма загрузки -->
+    <form id="upload_form" action="upload.php" enctype="multipart/form-data" method="post" onsubmit="return checkForm()">
+
+        <!-- скрытые параметры -->
+        <input id="x1" type="hidden" name="x1" />
+        <input id="y1" type="hidden" name="y1" />
+        <input id="x2" type="hidden" name="x2" />
+        <input id="y2" type="hidden" name="y2" />
+
+        <!-- Выбрать файл изображения -->
+
+        <div><input id="image_file" type="file" name="image_file" onchange="fileSelectHandler()" /></div>
+        <div class="error"></div>
+        <div class="step2">
+
+            <!-- Указать новый размер -->
+
+            <img id="preview" alt="" />
+            <div class="info">
+                <label>Размер файла</label> <input id="filesize" type="text" name="filesize" />
+                <label>Тип</label> <input id="filetype" type="text" name="filetype" />
+                <label>Размер изображения</label> <input id="filedim" type="text" name="filedim" />
+                <label>Ширина</label> <input id="w" type="text" name="w" />
+                <label>Высота</label> <input id="h" type="text" name="h" />
+            </div>
+            <input type="submit" value="Готово" />
+        </div>
+    </form>
+</div>
+
+
+
+
+@Scripts.Render("~/bundles/jcrop")

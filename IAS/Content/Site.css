@@ -1,0 +1,226 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Exo+2);
+
+html, body, .body-content, .row, .left-menu{
+    height: 100%;
+}
+
+body {
+
+    background: #fff;
+    color: #73879C;
+    font-family: "Exo 2";
+
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+
+.logo{
+    width: 25px;
+    height: 30px;
+    float: left;
+    background: url(/Content/Images/logo.png) no-repeat center;
+    background-size: contain;
+}
+
+.l-2x{
+    width: 50px;
+    height: 60px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+footer{
+    text-align: center;
+    border-top: 1px solid #73879C;
+}
+
+.body-content{
+    height: 100%;
+}
+
+.header{
+    background: #ededed;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #D9DEE4;
+}
+
+.main{
+    background: white;
+}
+
+.left-menu{
+    height: 100%;
+    background: #2A3F54;
+}
+
+.closed{
+    text-align: center;
+}
+
+.menu-title{
+    color: white;
+    font-size: 20px;
+    padding: 10px 0 10px 0;
+    text-align: center;
+}
+
+.header-right{
+    text-align: right;
+    color: #000;
+}
+
+.user-search{
+    text-align: right;
+}
+
+.header-left{
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+#menu-toggle{
+
+    margin: 0;
+    text-decoration: none;
+    color: #5A738E;
+    cursor: pointer;
+}
+
+.logo-rounded{
+    border: 1px solid white;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.photo-small{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.profile-main{
+    margin: 50px 10px 10px;
+    border: 1px solid #E6E9ED;
+    padding: 15px;
+}
+
+.title{
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.user-activity{
+    
+}
+
+.avatar-view{
+    padding: 5px;
+    margin: 0px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 212px;
+    height: 212px;
+}
+
+.fio{
+    font-size: 22px;
+}
+
+.user-search{
+    padding-top: 5px;
+}
+
+.remove-photo, .remove-nophoto
+{
+    color: white;
+    background: black;
+    opacity: 0.6;
+    display: inline-block;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    position: relative;
+    top: -200px;
+    left: 180px;
+    cursor: pointer;
+    display: none;
+
+}
+
+.set-photo
+{
+position: relative;
+top: -50px;
+color: white;
+background: black;
+opacity: 0.6;
+text-align: center;
+height: 30px;
+line-height: 30px;
+font-size: 16px;
+cursor: pointer;
+display: none;
+}
+
+
+.add{
+    position: relative;
+    top: -30px;
+}
+
+.not-found{
+    text-align: center;
+    font-size: 22px;
+}
+
+.select-photo{
+    width: 500px;
+    height: 200px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-around;
+    padding: 20px;
+    text-align: center;
+}
+
+.lity-link, .lity-link:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.btn-blue{
+    background-color: #6287ae;
+    color: #fff;
+}
+
+/*#preview{
+    text-align: center;
+    display: block !important;
+    visibility:visible !important;
+}*/
+
+#upload_form{
+    height: 100%;
+}
+.jcrop-keymgr{
+    display: none;
+}

@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – ИАС "Академия"</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/lity")
+
+
+
+
+</head>
+<body>
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
+                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
+                    <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
+                </ul>
+                <p class="nav navbar-text navbar-right">Здравствуйте, @User.Identity.Name!</p>
+            </div>
+        </div>
+    </div>*@
+    <div class="container-fluid body-content">
+        <div class="row">
+            <div class="col-md-3 left-menu opened">
+                <div class="menu-title">
+                    <div class="logo"></div><span> ИАС "Академия"</span>
+
+                </div>
+
+                @Html.Partial("_LeftMenu")
+
+            </div>
+            <div class="col-md-21 cont">
+                <div class="row">
+                    <div class="col-md-24 header">
+                        <div class="col-md-12 header-left">
+                            <a id="menu-toggle">
+                                <i class="fa fa-bars fa-2x"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-12 header-right">
+                            <img src="~/Content/Avatars/tolstov_vv.jpg" class="photo-small"/>
+                            Василий Пупкин <i class="fa fa-angle-down"></i>
+                        </div>
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-24 main">
+                        @RenderBody()
+                    </div>
+                </div>
+                </div>
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year – ЦИТ, Отдел разработки информационных систем</p>
+            </footer>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            if (getCookie("state") == null)
+                setCookie("state", "opened", "3600", "/")
+
+            if (getCookie("state") == "closed")
+                menuClose() 
+        $("#menu-toggle").click(function () {
+            if ($(".left-menu").hasClass("opened")) {
+                menuClose()    
+            } else {
+                menuOpen()
+            }
+            
+        })
+
+        
+        function menuOpen() {
+            $(".left-menu").removeClass("col-md-1").addClass("col-md-3").addClass("opened").removeClass("closed")
+            $(".cont").removeClass("col-md-23").addClass("col-md-21")
+            $(".menu-title>.logo").removeClass("l-2x")
+            $(".menu-title>span").show()
+            setCookie("state", "opened", "3600", "/" )
+        }
+
+        function menuClose(){
+            $(".left-menu").removeClass("col-md-3").addClass("col-md-1").removeClass("opened").addClass("closed")
+            $(".cont").removeClass("col-md-21").addClass("col-md-23")
+            $(".menu-title>.logo").addClass("l-2x")
+            $(".menu-title>span").hide()
+            setCookie("state", "closed", "3600", "/")
+        }
+
+
+        function setCookie(name, value, expires, path, domain, secure) {
+            document.cookie = name + "=" + escape(value) +
+              ((expires) ? "; expires=" + expires : "") +
+              ((path) ? "; path=" + path : "") +
+              ((domain) ? "; domain=" + domain : "") +
+              ((secure) ? "; secure" : "");
+        }
+
+
+        function getCookie(name) {
+            var matches = document.cookie.match(new RegExp(
+              "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+
+
+
+
+
+
+    });
+    </script>
+</body>
+</html>

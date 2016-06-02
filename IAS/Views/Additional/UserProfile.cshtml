@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.Title = "Профиль";
+}
+
+
+
+<div class="profile-container">
+    <div class="row">
+        <div class="col-md-12">
+            <span class="title">Профиль пользователя</span>
+        </div>
+        <div class="col-md-7"></div>
+        <div class="col-md-5 user-search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Найти пользователя...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </span>
+            </div><!-- /input-group -->
+        </div>
+
+    </div>
+    <div class="profile-main">
+        <div class="row">
+            <div class="col-md-5 user-info">
+                <div class="avatar-view">
+                    <img src="@Model.photo" border="0" width="200px" height="200px" />
+                    @if (Model.check)
+                    {
+                        <div class="remove-photo" title="Удалить фото"><i class="fa fa-times"></i></div>
+                        <div class="set-photo"><a class="lity-link" href="#set-photo" data-lity><i class="fa fa-pencil"></i> Изменить фото</a></div>
+                    }
+                    else
+                    {
+
+                        <div class="set-photo add"><a class="lity-link" href="#set-photo" data-lity><i class="fa fa-plus"></i> Добавить фото</a></div>
+                    }
+                </div>
+                <div class="user-rows">
+                    <div class="fio">@Model.sName</div>
+                    <div class="fio">@Model.fName @Model.mName</div>
+                    <ul class="list-unstyled user_data">
+                        <li>
+                            <i class="fa fa-building user-profile-icon"></i> @Model.department
+                        </li>
+                        <li>
+                            <i class="fa fa-briefcase user-profile-icon"></i> @Model.pos
+                        </li>
+                        <li class="m-top-xs">
+                            <i class="fa fa-phone user-profile-icon"></i>
+                            @Model.phone
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-19 user-activity">
+                <div class="not-found">Недавняя активность отсутствует</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="set-photo" style="background:#fff" class="lity-hide select-photo">
+
+
+        <!-- форма загрузки -->
+
+            <!-- скрытые параметры -->
+            <input id="x1" type="hidden" name="x1" />
+            <input id="y1" type="hidden" name="y1" />
+            <input id="x2" type="hidden" name="x2" />
+            <input id="y2" type="hidden" name="y2" />
+
+
+            <div class="flex-row step1">Выберите изображение на компьютере</div>
+            <div class="flex-row step1"><a href="#" class="btn btn-default btn-blue" role="button" id="image-select">Выбрать изображение</a></div>
+
+
+            <div style="display: none;"><input id="image_file" type="file" name="image_file" onchange="fileSelectHandler()" /></div>
+
+            <div class="step2 flex-row">
+                <!-- Указать новый размер -->
+                <div class="flex-row">Выбранная область будет выбрана в качестве Вашей фотографии.</div>
+                <div class="flex-row error"></div>
+                <div class="flex-row">
+                <img id="preview" alt=""/>
+                @*<div class="info">
+                    <label>Размер файла</label> <input id="filesize" type="text" name="filesize" />
+                    <label>Тип</label> <input id="filetype" type="text" name="filetype" />
+                    <label>Размер изображения</label> <input id="filedim" type="text" name="filedim" />
+                    <label>Ширина</label> <input id="w" type="text" name="w" />
+                    <label>Высота</label> <input id="h" type="text" name="h" />
+                </div>*@
+                </div>
+
+                <div class="flex-row"><input type="submit" value="Выбрать" /></div>
+            </div>
+
+</div>
+
+@*<div class="bbody">
+
+    <!-- форма загрузки -->
+    <form id="upload_form" action="upload.php" enctype="multipart/form-data" method="post" onsubmit="return checkForm()">
+
+        <!-- скрытые параметры -->
+        <input id="x1" type="hidden" name="x1" />
+        <input id="y1" type="hidden" name="y1" />
+        <input id="x2" type="hidden" name="x2" />
+        <input id="y2" type="hidden" name="y2" />
+
+        <!-- Выбрать файл изображения -->
+
+        <div><input id="image_file" type="file" name="image_file" onchange="fileSelectHandler()" /></div>
+        <div class="error"></div>
+        <div class="step2">
+
+            <!-- Указать новый размер -->
+
+            <img id="preview" alt="" style="display: none !important;"/>
+            <div class="info">
+                <label>Размер файла</label> <input id="filesize" type="text" name="filesize" />
+                <label>Тип</label> <input id="filetype" type="text" name="filetype" />
+                <label>Размер изображения</label> <input id="filedim" type="text" name="filedim" />
+                <label>Ширина</label> <input id="w" type="text" name="w" />
+                <label>Высота</label> <input id="h" type="text" name="h" />
+            </div>
+            <input type="submit" value="Готово" />
+        </div>
+    </form>
+</div>*@
+
+
+
+
+
+        <script type="text/javascript">
+    $(document).ready(function() {
+        $(".avatar-view").mouseover(function () {
+            $(".set-photo").show();
+            $(".remove-photo").show();
+
+        })
+
+        $(".avatar-view").mouseout(function () {
+            $(".remove-photo").hide();
+            $(".set-photo").hide();
+        })
+
+        $("#image-select").click(function(){
+            $("#image_file").click();
+        })
+
+
+
+
+        //function fileSelectHandler() {
+        $("#image_file").change(function(){
+            //    $(".lity-close").click();
+            $(".step1").hide()
+            $("#set-photo").animate({
+                width: "100%",
+                height: "100%"
+            }, 1);
+          
+        })
+
+    })
+        </script>
+
+
+@Scripts.Render("~/bundles/jcrop")
