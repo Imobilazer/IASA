@@ -175,6 +175,7 @@
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\oval.svg" />
     <Content Include="Content\Jcrop.gif" />
     <Content Include="Content\jquery.Jcrop.css" />
     <Content Include="Content\lity.css" />

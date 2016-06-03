@@ -1,6 +1,4 @@
-﻿@import url(https://fonts.googleapis.com/css?family=Exo+2);
-
-html, body, .body-content, .row, .left-menu{
+﻿html, body, .body-content, .row, .left-menu{
     height: 100%;
 }
 
@@ -127,13 +125,10 @@ footer{
     margin-left: 10px;
 }
 
-.user-activity{
-    
-}
 
 .avatar-view{
     padding: 5px;
-    margin: 0px;
+    margin: 0;
     border: 1px solid gray;
     border-radius: 5px;
     width: 212px;
@@ -153,7 +148,6 @@ footer{
     color: white;
     background: black;
     opacity: 0.6;
-    display: inline-block;
     text-align: center;
     width: 20px;
     height: 20px;
@@ -223,4 +217,8 @@ display: none;
 }
 .jcrop-keymgr{
     display: none;
+}
+#avatar-img{
+    width: 200px;
+    height: 200px;
 }
