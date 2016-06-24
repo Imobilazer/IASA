@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IAS.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace IAS.Controllers
 {
     public class HomeController : Controller
     {
+        iasaContext db = new iasaContext();
+
         public ActionResult Index()
         {
-            return View();
+            
+            var mains = db.Mains.Include(m => m.User).Include(w => w.Worktype).ToList();
+            mains.Reverse();
+            return View(mains);
         }
 
         public ActionResult About()
@@ -22,9 +26,14 @@ namespace IAS.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.Message = "Активность пользователей";
             return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

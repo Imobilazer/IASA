@@ -222,3 +222,10 @@ display: none;
     width: 200px;
     height: 200px;
 }
+
+.activity_row{
+    background-color: #e6f4ff;
+    margin: 3px;
+    border: 1px solid lightgray;
+    padding: 10px 0 10px 5px;
+}

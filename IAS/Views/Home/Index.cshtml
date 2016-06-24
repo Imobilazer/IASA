@@ -1,5 +1,36 @@
-﻿@{
+﻿@model IEnumerable<IAS.Models.Main>
+@{
     ViewBag.Title = "Главная";
+    string ago = "";
 }
 
-123
+<div class="main_content">
+    @foreach (var item in Model)
+    {
+        <div class="activity_row">
+            <img class="photo-small" src="~/Content/Avatars/tolstov_vv.jpg" border="0" />
+            @Html.DisplayFor(modelItem => item.User.FIO) добавил(а) запись по показателю вклада "@Html.DisplayFor(modelItem => item.Worktype.Name)"
+            @{TimeSpan ts = DateTime.Now - item.Create;
+                if (ts.Hours == 0)
+                {
+                    int temp = ts.Minutes;
+                    string min = "";
+                    if (temp > 19) { temp = temp % 10; }
+                    if (temp == 0) { min = "минут"; }
+                    if (temp > 4 && temp < 20) { min = "минут"; }
+                    if (temp == 1) { min = "минута"; }
+                    if (temp > 1 && temp < 5) { min = "минуты"; }
+
+                    ago = " "+ts.Minutes + " " + min + " назад";
+                }
+                else
+                {
+                    ago = " "+item.Create.ToString("dd.MM.yyyy в HH:mm");
+                }
+            }
+            @ago
+
+        </div>
+    }
+
+</div>

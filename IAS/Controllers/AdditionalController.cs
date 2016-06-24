@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IAS.Classes;
+using IAS.Models;
 
 namespace IAS.Controllers
 {
     public class AdditionalController : Controller
     {
         // GET: Additional
+        iasaContext db = new iasaContext();
         public ActionResult UserProfile()
         {
 
