@@ -1,5 +1,7 @@
 ﻿@{
+
     ViewBag.Title = "Профиль";
+    string ago = "";
 }
 
 
@@ -54,8 +56,49 @@
                 </div>
             </div>
             <div class="col-md-19 user-activity">
-                <div class="not-found">Недавняя активность отсутствует</div>
-            </div>
+                @if (Model.records.Count == 0)
+                {
+                    <div class="not-found">Недавняя активность отсутствует</div>
+                }
+                else
+                {
+                    <div class="not-found">Последняя активность пользователей</div>
+                    IAS.Classes.pathPhoto path = new IAS.Classes.pathPhoto();
+                    string pathPhoto = "";
+
+                    foreach (var item in Model.records)
+                    {
+                        <div class="activity_row">
+                            @{pathPhoto = path.setPath(item.User.DomainName); }
+                            <img class="photo-small" src="@pathPhoto" border="0" />
+                            @item.User.FIO добавил(а) запись по показателю вклада "@item.Worktype.Name"
+                            @{
+                                    TimeSpan ts = DateTime.Now - item.Create;
+                                    if (ts.Hours == 0)
+                                    {
+                                        int temp = ts.Minutes;
+                                        string min = "";
+                                        if (temp > 19) { temp = temp % 10; }
+                                        if (temp == 0) { min = "минут"; }
+                                        if (temp > 4 && temp < 20) { min = "минут"; }
+                                        if (temp == 1) { min = "минуту"; }
+                                        if (temp > 1 && temp < 5) { min = "минуты"; }
+
+                                        ago = " " + ts.Minutes + " " + min + " назад";
+                                    }
+                                    else
+                                    {
+                                        ago = " " + item.Create.ToString("dd.MM.yyyy в HH:mm");
+                                    }
+
+                                    @ago
+                                    }
+                            </div>
+                    }
+                }
+
+
+                        </div>
         </div>
     </div>
 </div>
@@ -64,7 +107,46 @@
 <div id="set-photo" style="background:#fff" class="lity-hide select-photo">
 
 
+    <!-- форма загрузки -->
+    <!-- скрытые параметры -->
+    <input id="x1" type="hidden" name="x1" />
+    <input id="y1" type="hidden" name="y1" />
+    <input id="x2" type="hidden" name="x2" />
+    <input id="y2" type="hidden" name="y2" />
+
+
+    <div class="flex-row step1">Выберите изображение на компьютере</div>
+    <div class="flex-row step1"><a href="#" class="btn btn-default btn-blue" role="button" id="image-select">Выбрать изображение</a></div>
+    <div class="error"></div>
+
+    <div style="display: none;"><input id="image_file" type="file" name="image_file" onchange="fileSelectHandler()" /></div>
+
+    <div class="step2 flex-row">
+        <form action="" method="post" enctype="multipart/form-data">
+            <!-- Указать новый размер -->
+            <div class="flex-row">Выбранная область будет выбрана в качестве Вашей фотографии.</div>
+            <div class="flex-row error"></div>
+            <div class="flex-row">
+                <img id="preview" alt="" />
+                @*<div class="info">
+                        <label>Размер файла</label> <input id="filesize" type="text" name="filesize" />
+                        <label>Тип</label> <input id="filetype" type="text" name="filetype" />
+                        <label>Размер изображения</label> <input id="filedim" type="text" name="filedim" />
+                        <label>Ширина</label> <input id="w" type="text" name="w" />
+                        <label>Высота</label> <input id="h" type="text" name="h" />
+                    </div>*@
+            </div>
+
+            <div class="flex-row"><input type="submit" value="Выбрать" /></div>
+        </form>
+    </div>
+
+</div>
+
+@*<div class="bbody">
+
         <!-- форма загрузки -->
+        <form id="upload_form" action="upload.php" enctype="multipart/form-data" method="post" onsubmit="return checkForm()">
 
             <!-- скрытые параметры -->
             <input id="x1" type="hidden" name="x1" />
@@ -72,71 +154,33 @@
             <input id="x2" type="hidden" name="x2" />
             <input id="y2" type="hidden" name="y2" />
 
+            <!-- Выбрать файл изображения -->
 
-            <div class="flex-row step1">Выберите изображение на компьютере</div>
-            <div class="flex-row step1"><a href="#" class="btn btn-default btn-blue" role="button" id="image-select">Выбрать изображение</a></div>
+            <div><input id="image_file" type="file" name="image_file" onchange="fileSelectHandler()" /></div>
+            <div class="error"></div>
+            <div class="step2">
 
-
-            <div style="display: none;"><input id="image_file" type="file" name="image_file" onchange="fileSelectHandler()" /></div>
-
-            <div class="step2 flex-row">
                 <!-- Указать новый размер -->
-                <div class="flex-row">Выбранная область будет выбрана в качестве Вашей фотографии.</div>
-                <div class="flex-row error"></div>
-                <div class="flex-row">
-                <img id="preview" alt=""/>
-                @*<div class="info">
+
+                <img id="preview" alt="" style="display: none !important;"/>
+                <div class="info">
                     <label>Размер файла</label> <input id="filesize" type="text" name="filesize" />
                     <label>Тип</label> <input id="filetype" type="text" name="filetype" />
                     <label>Размер изображения</label> <input id="filedim" type="text" name="filedim" />
                     <label>Ширина</label> <input id="w" type="text" name="w" />
                     <label>Высота</label> <input id="h" type="text" name="h" />
-                </div>*@
                 </div>
-
-                <div class="flex-row"><input type="submit" value="Выбрать" /></div>
+                <input type="submit" value="Готово" />
             </div>
-
-</div>
-
-@*<div class="bbody">
-
-    <!-- форма загрузки -->
-    <form id="upload_form" action="upload.php" enctype="multipart/form-data" method="post" onsubmit="return checkForm()">
-
-        <!-- скрытые параметры -->
-        <input id="x1" type="hidden" name="x1" />
-        <input id="y1" type="hidden" name="y1" />
-        <input id="x2" type="hidden" name="x2" />
-        <input id="y2" type="hidden" name="y2" />
-
-        <!-- Выбрать файл изображения -->
-
-        <div><input id="image_file" type="file" name="image_file" onchange="fileSelectHandler()" /></div>
-        <div class="error"></div>
-        <div class="step2">
-
-            <!-- Указать новый размер -->
-
-            <img id="preview" alt="" style="display: none !important;"/>
-            <div class="info">
-                <label>Размер файла</label> <input id="filesize" type="text" name="filesize" />
-                <label>Тип</label> <input id="filetype" type="text" name="filetype" />
-                <label>Размер изображения</label> <input id="filedim" type="text" name="filedim" />
-                <label>Ширина</label> <input id="w" type="text" name="w" />
-                <label>Высота</label> <input id="h" type="text" name="h" />
-            </div>
-            <input type="submit" value="Готово" />
-        </div>
-    </form>
-</div>*@
+        </form>
+    </div>*@
 
 
 
 
 
-        <script type="text/javascript">
-    $(document).ready(function() {
+<script type="text/javascript">
+    $(document).ready(function () {
         $(".avatar-view").mouseover(function () {
             $(".set-photo").show();
             $(".remove-photo").show();
@@ -148,7 +192,7 @@
             $(".set-photo").hide();
         })
 
-        $("#image-select").click(function(){
+        $("#image-select").click(function () {
             $("#image_file").click();
         })
 
@@ -156,18 +200,18 @@
 
 
         //function fileSelectHandler() {
-        $("#image_file").change(function(){
+        $("#image_file").change(function () {
             //    $(".lity-close").click();
-            $(".step1").hide()
+            //$(".step1").hide()
             $("#set-photo").animate({
                 width: "100%",
                 height: "100%"
             }, 1);
-          
+
         })
 
     })
-        </script>
+</script>
 
 
 @Scripts.Render("~/bundles/jcrop")

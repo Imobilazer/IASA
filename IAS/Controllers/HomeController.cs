@@ -1,20 +1,13 @@
-﻿using IAS.Models;
-using System.Linq;
-using System.Web.Mvc;
-using System.Data.Entity;
+﻿using System.Web.Mvc;
 
 namespace IAS.Controllers
 {
     public class HomeController : Controller
     {
-        iasaContext db = new iasaContext();
 
         public ActionResult Index()
         {
-            
-            var mains = db.Mains.Include(m => m.User).Include(w => w.Worktype).ToList();
-            mains.Reverse();
-            return View(mains);
+            return View();
         }
 
         public ActionResult About()
@@ -30,10 +23,5 @@ namespace IAS.Controllers
             return View();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
     }
 }

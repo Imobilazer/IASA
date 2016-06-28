@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using IAS.Classes;
 using IAS.Models;
+using System.IO;
+using System.Data.Entity;
 
 namespace IAS.Controllers
 {
@@ -12,8 +12,27 @@ namespace IAS.Controllers
     {
         // GET: Additional
         iasaContext db = new iasaContext();
+
         public ActionResult UserProfile()
         {
+            var mains = db.Mains.Include(m => m.User).Include(w => w.Worktype).ToList();
+            mains.Reverse();
+            try
+            {
+                mains = mains.GetRange(0, 10);
+            }
+            catch (Exception)
+            {
+
+            }
+            
+
+            foreach (string upload in Request.Files)
+            {
+                string path = AppDomain.CurrentDomain.BaseDirectory + "Content/Avatars/";
+                string filename = Path.GetFileName(Request.Files[upload].FileName);
+                Request.Files[upload].SaveAs(Path.Combine(path, filename));
+            }
 
             GetInfoUsers gif = new GetInfoUsers();
             Info inform = Info.getInfo();
@@ -30,7 +49,12 @@ namespace IAS.Controllers
             iasm.phone = inform.AllInfo["phone"];
             iasm.photo = pPath;
             iasm.check = c.check(inform.AllInfo["uName"]);
+
+            iasm.records = mains;
+
             return View(iasm);
         }
+
+
     }
 }

@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    IAS.Classes.GetInfoUsers gif = new IAS.Classes.GetInfoUsers();
+    IAS.Classes.Info inform = IAS.Classes.Info.getInfo();
+    inform.AllInfo = gif.returninfo(User.Identity.Name);
+}
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -80,8 +87,13 @@
                             </a>
                         </div>
                         <div class="col-md-12 header-right">
-                            <img src="~/Content/Avatars/tolstov_vv.jpg" class="photo-small"/>
-                            Василий Пупкин <i class="fa fa-angle-down"></i>
+                            @{
+                                IAS.Classes.pathPhoto path = new IAS.Classes.pathPhoto();
+                                string pathPhoto = path.setPath(inform.AllInfo["uName"]);
+                                }
+
+                            <img src="@pathPhoto" class="photo-small"/>
+                            @inform.AllInfo["fName"] @inform.AllInfo["sName"] <i class="fa fa-angle-down"></i>
                         </div>
                      </div>
                 </div>
@@ -93,7 +105,10 @@
                 </div>
             <hr />
             <footer>
-                <p>&copy; @DateTime.Now.Year – ЦИТ, Отдел разработки информационных систем</p>
+                <div class="panel-footer">
+                    Академия управления при Президенте Республики Беларусь <br />
+                    &copy; @DateTime.Now.Year – ЦИТ, Отдел разработки информационных систем
+                </div>
             </footer>
         </div>
     </div>

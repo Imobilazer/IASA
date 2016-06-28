@@ -67,6 +67,7 @@ function fileSelectHandler() {
         oImage.onload = function () { // onload event handler
 
             // display step 2
+            $('.step1').fadeOut(100);
             $('.step2').fadeIn(500);
 
             // display some basic image info
